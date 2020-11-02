@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: sans-serif, "Helvetica Neue", sans-serif; }
+h1 {
+  text-align: center;
+}
+.DialogButtonsWrapper {
+  display: flex;
+  justify-content: space-around;
+}

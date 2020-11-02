@@ -1,0 +1,54 @@
+<h1 mat-dialog-title style='text-align: center;'>რეგისტრაცია</h1>
+<!--<h2 style='color:#ad0a0a;text-align: center;'>{{errorMessage}}</h2>-->
+<div mat-dialog-content>
+  <mat-grid-list cols="1" rowHeight="80px">
+    <form [formGroup]='registerMainFormGroup'>
+
+      <mat-grid-tile>
+        <mat-form-field class="add-user-form-item">
+          <mat-label>მეილი</mat-label>
+          <input matInput placeholder="Email" formControlName="email" autocomplete="off" required>
+          <mat-error>
+            Please provide a valid email address
+          </mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="add-user-form-item">
+          <mat-label>სახელი</mat-label>
+          <input matInput formControlName='firstName'>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="add-user-form-item">
+          <mat-label>გვარი</mat-label>
+          <input matInput formControlName='lastName'>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="add-user-form-item">
+          <mat-label>იბან</mat-label>
+          <input matInput formControlName='iban'>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="add-user-form-item">
+          <mat-label>პირადი ნომერი</mat-label>
+          <input matInput formControlName='personalNumber'>
+        </mat-form-field>
+      </mat-grid-tile>
+
+
+
+    </form>
+  </mat-grid-list>
+</div>
+<div mat-dialog-actions class="DialogButtonsWrapper">
+  <button mat-flat-button color='primary' (click)="applyData()">დასტური
+  </button>
+  <button mat-flat-button color='primary' (click)="closeDialog()">დახურვა</button>
+</div>

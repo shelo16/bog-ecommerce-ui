@@ -1,0 +1,32 @@
+<h1 mat-dialog-title style='text-align: center;'>Log In</h1>
+
+
+    <mat-card-content>
+      <form [formGroup]="loginFormGroup" >
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Email" formControlName="email" autocomplete="off" required>
+          <mat-error>
+            Please provide a valid email address
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input password-field" >
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
+          <mat-error>
+            Please provide a valid password
+          </mat-error>
+        </mat-form-field>
+        <div mat-dialog-actions class="DialogButtonsWrapper">
+          <button mat-flat-button color='primary' (click)="login()">
+            ავტორიზაცია
+          </button>
+          <button mat-flat-button color='primary' (click)="forgotPassword()">
+            დაგავიწყდათ პაროლი?
+          </button>
+          <button mat-flat-button color='primary' (click)="closeDialog()">დახურვა</button>
+        </div>
+      </form>
+    </mat-card-content>
+
+
+

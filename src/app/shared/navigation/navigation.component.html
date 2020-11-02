@@ -1,0 +1,29 @@
+<div class="navigation-wrapper">
+  <nav>
+    <ul>
+      <button mat-raised-button color="primary" routerLink="/risk-report" >რისკების რეპორტი</button>
+      <button mat-raised-button color="primary" routerLink="/risk-report" >დაკავშირებული პირები</button>
+      <div *ngIf="!authenticated">
+        <button mat-raised-button color="primary" (click)="openDialog('Login')" class="AuthButtons">
+          ლოგინ
+        </button>
+        <button mat-raised-button color="primary" (click)="openDialog('Register')" class="AuthButtons">
+          <strong>+</strong> რეგისტრაცია
+        </button>
+      </div>
+    </ul>
+  </nav>
+  <div class="user-section">
+    <div class="userWrapper" *ngIf="authenticated">
+      <div class="user-image-wrapper">
+        <img src="./assets/images/user.png" [title]="username" alt="user logo">
+      </div>
+      <div>
+        <p>{{username}}</p>
+      </div>
+    </div>
+    <div class="logout-image-wrapper">
+      <img src="../../assets/images/logout.png" (click)="logout()" style="width:27px" alt="logout logo" title="logout">
+    </div>
+  </div>
+</div>

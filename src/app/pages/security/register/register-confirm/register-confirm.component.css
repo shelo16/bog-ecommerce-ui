@@ -1,0 +1,11 @@
+mat-card{
+  max-width: 50%;
+  margin-left: 25%;
+  margin-top: 5%;
+  alignment: center;
+  justify-content: center;
+}
+
+mat-card-content{
+  text-align: center;
+}

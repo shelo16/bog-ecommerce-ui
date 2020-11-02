@@ -1,0 +1,90 @@
+.navigation-wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row nowrap;
+  width: 100vw;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid black;
+}
+
+.navigation-wrapper nav {
+  flex-grow: 6;
+  display: flex;
+  align-items:center;
+  justify-content: space-around;
+
+}
+
+.navigation-wrapper nav ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.navigation-wrapper nav ul li {
+  list-style: none;
+  background-color: rgba(74, 71, 71, 0.7);
+  color: white;
+  border-radius: 10px;
+  padding: .8rem;
+  cursor: pointer;
+}
+
+.navigation-wrapper nav ul li:hover {
+  background-color: rgba(48, 48, 48, 0.7);
+}
+
+.user-section {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.userWrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px;
+  color: white;
+  padding: 0.45rem 0.8rem;
+  background-color: rgba(74, 71, 71, 0.7);
+}
+
+.userWrapper:hover{
+  background-color: rgba(48, 48, 48, 0.7);
+  cursor: pointer;
+}
+
+.userWrapper p{
+  margin: 10px;
+}
+
+.logo-wrapper {
+  flex-grow: 1;
+  padding-left: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-wrapper img {
+  width: 70px;
+}
+
+.logout-image-wrapper {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.user-image-wrapper, .logout-image-wrapper {
+  cursor: pointer;
+  max-width:100%;
+  max-height:100%;
+}
+
+.AuthButtons{
+  margin-left: 20px;
+}

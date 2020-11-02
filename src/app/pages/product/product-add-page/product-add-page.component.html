@@ -1,0 +1,41 @@
+<h1 mat-dialog-title style='text-align: center;'>დაამატეთ პროდუქტი</h1>
+<!--<h2 style='color:#ad0a0a;text-align: center;'>{{errorMessage}}</h2>-->
+<div mat-dialog-content>
+  <mat-grid-list cols="1" rowHeight="80px">
+    <form [formGroup]='productFormGroup'>
+
+      <mat-grid-tile>
+        <mat-form-field class="add-user-form-item">
+          <mat-label>პროდუქტის სახელი</mat-label>
+          <input matInput placeholder="productName" formControlName="productName" required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="add-user-form-item">
+          <mat-label>ფასი</mat-label>
+          <input matInput formControlName='productPrice' appNumbersOnlyWithDecimal>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="add-user-form-item">
+          <mat-label>მარაგი</mat-label>
+          <input matInput formControlName='productQuantity' appNumbersOnly>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <label class="btn btn-default">
+          <input type="file" (change)="selectFile($event)" formControlName="imageFile"/>
+        </label>
+      </mat-grid-tile>
+
+    </form>
+  </mat-grid-list>
+</div>
+<div mat-dialog-actions class="DialogButtonsWrapper">
+  <button mat-flat-button color='primary' (click)="addProduct()">დასტური
+  </button>
+  <button mat-flat-button color='primary' (click)="closeDialog()">დახურვა</button>
+</div>
