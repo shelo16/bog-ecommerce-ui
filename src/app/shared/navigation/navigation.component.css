@@ -61,16 +61,13 @@
 }
 
 .logo-wrapper {
+
   flex-grow: 1;
   padding-left: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.logo-wrapper img {
-  width: 70px;
 }
 
 .logout-image-wrapper {

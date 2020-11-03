@@ -3,7 +3,6 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {SnackbarService} from '../../../../utils/service/snackbar.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {ProductsService} from '../../../../utils/service/ProductsService';
-import {AuthDataService} from '../../../../utils/service/auth-data.service';
 
 @Component({
   selector: 'app-product-add-page',
@@ -11,8 +10,6 @@ import {AuthDataService} from '../../../../utils/service/auth-data.service';
   styleUrls: ['./product-add-page.component.css']
 })
 export class ProductAddPageComponent implements OnInit {
-
-  selectedFiles: FileList;
 
   productFormGroup = this.formBuilder.group({
     productName: ['', [Validators.required]],
@@ -41,14 +38,29 @@ export class ProductAddPageComponent implements OnInit {
   addProduct() {
     console.log(this.productFormGroup.value);
     this.productService.saveProduct(this.productFormGroup.value).subscribe(
-      data => console.log(data)
+      data => {
+        this.snackBarService.openSnackBar('წარმატებით დაემატა პროდუქტი', 1500).afterDismissed().subscribe(
+          () => this.reloadPage()
+        );
+      },
+      err => {
+        if (err.error.message) {
+          this.snackBarService.openSnackBar(err.error.message, 3000);
+        } else {
+          this.snackBarService.openSnackBar('დაფიქსირდა შეცდომა', 3000);
+        }
+      }
     );
+  }
+
+  reloadPage(): void {
+    window.location.reload();
   }
 
   selectFile(event): void {
     let reader = new FileReader();
 
-    if(event.target.files && event.target.files.length) {
+    if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsBinaryString(file);
 
