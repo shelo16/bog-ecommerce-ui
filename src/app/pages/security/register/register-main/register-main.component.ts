@@ -39,7 +39,7 @@ export class RegisterMainComponent implements OnInit {
     this.regService.generateRegisterShortLink(this.registerMainFormGroup.value)
       .subscribe(
         data => {
-          this.snackBarService.openSnackBar('დასტურის მეილი გამოიგზავნა').afterDismissed().subscribe(
+          this.snackBarService.openSnackBar('დასტურის მეილი გამოიგზავნა',3000).afterDismissed().subscribe(
             () => {
               this.closeDialog();
             }
@@ -48,7 +48,7 @@ export class RegisterMainComponent implements OnInit {
         },
         err => {
           console.log(err);
-          this.snackBarService.openSnackBar('შეცდომა');
+          this.snackBarService.openSnackBar('შეცდომა',3000);
         }
       );
   }

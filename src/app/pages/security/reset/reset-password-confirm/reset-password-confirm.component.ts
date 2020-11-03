@@ -16,7 +16,7 @@ export class ResetPasswordConfirmComponent implements OnInit {
   userDataFormGroup = this.formBuilder.group({
     password: [null, [Validators.required]],
     uuid: [null, [Validators.required]],
-    type: ['REGISTER', [Validators.required]]
+    type: ['RESET', [Validators.required]]
   });
 
   constructor(

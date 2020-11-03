@@ -6,6 +6,8 @@ import {SnackbarService} from '../../../../utils/service/snackbar.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {MainUtilsService} from '../../../../utils/service/main-utils.service';
 import {Modals} from '../../../../utils/enums';
+import {BehaviorSubject} from 'rxjs';
+import {AuthDataService} from '../../../../utils/service/auth-data.service';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +24,10 @@ export class LoginComponent implements OnInit {
               private loginService: LoginService,
               public dialogRef: MatDialogRef<LoginComponent>,
               private snackBarService: SnackbarService,
-              private mainUtilsService: MainUtilsService) {
+              private mainUtilsService: MainUtilsService,
+              private authDataService: AuthDataService) {
   }
 
-  jwt: string;
-  isClicked = false;
   loginFormGroup = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]]
@@ -37,21 +38,19 @@ export class LoginComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   login() {
-    this.isClicked = true;
     console.log(this.loginFormGroup.value);
     this.loginService.authenticate(this.loginFormGroup.value)
       .subscribe(
         data => {
-          this.snackBarService.openSnackBar('წარმატებით გაიარეთ ავტორიზაცია').afterDismissed().subscribe(
+          this.authDataService.setAuthInfo(data.email);
+          this.snackBarService.openSnackBar('წარმატებით გაიარეთ ავტორიზაცია',1500).afterDismissed().subscribe(
             () => this.reloadPage()
           );
-          console.log(data);
           this.justLoggedIn = true;
         },
         err => {
           this.errorMessage = err;
-          this.justLoggedIn = false;
-          this.snackBarService.openSnackBar('არასწორი მეილი ან პაროლი');
+          this.snackBarService.openSnackBar('არასწორი მეილი ან პაროლი',3000);
         }
       );
   }

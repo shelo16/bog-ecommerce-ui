@@ -5,6 +5,7 @@ import {finalize} from 'rxjs/operators';
 import {LoginService} from '../../../utils/service/login-service';
 import {SnackbarService} from '../../../utils/service/snackbar.service';
 import {Modals} from '../../../utils/enums';
+import {AuthDataService} from '../../../utils/service/auth-data.service';
 
 @Component({
   selector: 'app-navigation',
@@ -13,18 +14,32 @@ import {Modals} from '../../../utils/enums';
 })
 export class NavigationComponent implements OnInit {
 
-  authenticated: boolean = false;
-  username: string = '';
-
   constructor(
     private router: Router,
     private mainUtils: MainUtilsService,
     private loginService: LoginService,
-    private snackbarService: SnackbarService) {
+    private snackbarService: SnackbarService,
+    public authDataService: AuthDataService) {
   }
 
   ngOnInit() {
-    this.checkUserAuthenticated();
+
+    this.checkUserLoggedIn();
+    this.authDataService.loggedIn$.subscribe(
+      data => console.log('Dataa',data)
+    );
+
+  }
+
+  checkUserLoggedIn() {
+    this.loginService.checkIfAuthenticated().subscribe(
+      data => {
+        this.authDataService.setAuthInfo(data.email);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   logout(): void {
@@ -38,18 +53,11 @@ export class NavigationComponent implements OnInit {
   }
 
   logoutSuccessHandler() {
-    this.snackbarService.openSnackBar('წარმატებით გაიარეთ logout').afterDismissed()
+    this.authDataService.setLogOutInfo();
+    this.snackbarService.openSnackBar('წარმატებით გაიარეთ logout',3000).afterDismissed()
       .subscribe(() => this.reloadPage());
   }
 
-  checkUserAuthenticated() {
-    this.loginService.checkIfAuthenticated().subscribe(
-      resp => {
-        this.authenticated = resp.isAuthenticated;
-        this.username = resp.userName;
-      }
-    );
-  }
 
   openDialog(modal: string) {
     if (modal === 'Login') {

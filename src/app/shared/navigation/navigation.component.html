@@ -3,7 +3,7 @@
     <ul>
       <button mat-raised-button color="primary" routerLink="/risk-report" >რისკების რეპორტი</button>
       <button mat-raised-button color="primary" routerLink="/risk-report" >დაკავშირებული პირები</button>
-      <div *ngIf="!authenticated">
+      <div *ngIf="!(authDataService.loggedIn$ | async)">
         <button mat-raised-button color="primary" (click)="openDialog('Login')" class="AuthButtons">
           ლოგინ
         </button>
@@ -14,15 +14,15 @@
     </ul>
   </nav>
   <div class="user-section">
-    <div class="userWrapper" *ngIf="authenticated">
+    <div class="userWrapper" *ngIf="authDataService.loggedIn$ | async">
       <div class="user-image-wrapper">
-        <img src="./assets/images/user.png" [title]="username" alt="user logo">
+        <img src="./assets/images/user.png" [title]="authDataService.email$ | async" alt="user logo">
       </div>
       <div>
-        <p>{{username}}</p>
+        <p>{{authDataService.email$ | async}}</p>
       </div>
     </div>
-    <div class="logout-image-wrapper">
+    <div class="logout-image-wrapper" *ngIf="authDataService.loggedIn$ | async">
       <img src="../../assets/images/logout.png" (click)="logout()" style="width:27px" alt="logout logo" title="logout">
     </div>
   </div>

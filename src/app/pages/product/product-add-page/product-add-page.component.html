@@ -7,27 +7,27 @@
       <mat-grid-tile>
         <mat-form-field class="add-user-form-item">
           <mat-label>პროდუქტის სახელი</mat-label>
-          <input matInput placeholder="productName" formControlName="productName" required>
+          <input matInput placeholder="productName" formControlName="productName" autocomplete="off" required>
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field class="add-user-form-item">
           <mat-label>ფასი</mat-label>
-          <input matInput formControlName='productPrice' appNumbersOnlyWithDecimal>
+          <input matInput formControlName='productPrice' appNumbersOnlyWithDecimal autocomplete="off">
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field class="add-user-form-item">
           <mat-label>მარაგი</mat-label>
-          <input matInput formControlName='productQuantity' appNumbersOnly>
+          <input matInput formControlName='productQuantity' appNumbersOnly autocomplete="off">
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <label class="btn btn-default">
-          <input type="file" (change)="selectFile($event)" formControlName="imageFile"/>
+          <input type="file" (change)="selectFile($event)">
         </label>
       </mat-grid-tile>
 
@@ -37,5 +37,5 @@
 <div mat-dialog-actions class="DialogButtonsWrapper">
   <button mat-flat-button color='primary' (click)="addProduct()">დასტური
   </button>
-  <button mat-flat-button color='primary' (click)="closeDialog()">დახურვა</button>
+  <button mat-flat-button color='warn' (click)="closeDialog()">დახურვა</button>
 </div>

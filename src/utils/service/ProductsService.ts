@@ -7,6 +7,7 @@ import {ApiService} from './api.service';
 })
 export class ProductsService {
   endpoint: string = '/products';
+  secureEndpoint: string = '/secure/product';
   headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
 
@@ -15,7 +16,11 @@ export class ProductsService {
 
 
   public saveProduct(product) {
-    return this.apiService.postWithoutCredentials(`${this.endpoint}`,product,this.headers);
+    return this.apiService.postWithCredentials(`${this.secureEndpoint}`,product,this.headers);
+  }
+
+  public getNewestProducts() {
+    return this.apiService.getWithoutCredentials(`${this.endpoint}`);
   }
 
 

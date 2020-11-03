@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {SnackbarService} from '../../../../utils/service/snackbar.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {ProductsService} from '../../../../utils/service/ProductsService';
+import {AuthDataService} from '../../../../utils/service/auth-data.service';
 
 @Component({
   selector: 'app-product-add-page',
@@ -14,7 +15,6 @@ export class ProductAddPageComponent implements OnInit {
   selectedFiles: FileList;
 
   productFormGroup = this.formBuilder.group({
-    ecommerceUserId:[1],
     productName: ['', [Validators.required]],
     productPrice: [null, [Validators.required]],
     productQuantity: [null, [Validators.required]],
@@ -25,7 +25,8 @@ export class ProductAddPageComponent implements OnInit {
     private snackBarService: SnackbarService,
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ProductAddPageComponent>,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private cd: ChangeDetectorRef
   ) {
 
   }
@@ -38,14 +39,28 @@ export class ProductAddPageComponent implements OnInit {
   }
 
   addProduct() {
-    console.log('Add product');
+    console.log(this.productFormGroup.value);
     this.productService.saveProduct(this.productFormGroup.value).subscribe(
       data => console.log(data)
     );
   }
 
   selectFile(event): void {
-    this.selectedFiles = event.target.files;
+    let reader = new FileReader();
+
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsBinaryString(file);
+
+      reader.onload = () => {
+        this.productFormGroup.patchValue({
+          imageFile: reader.result
+        });
+
+        // need to run CD since file load runs outside of zone
+        this.cd.markForCheck();
+      };
+    }
   }
 
 }
