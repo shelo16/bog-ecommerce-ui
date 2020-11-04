@@ -13,7 +13,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MainPageComponent} from './pages/main-page/main-page.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {NavigationComponent} from './shared/navigation/navigation.component';
@@ -25,6 +25,13 @@ import {ResetPasswordConfirmComponent} from './pages/security/reset/reset-passwo
 import {ProductAddPageComponent} from './pages/product/product-add-page/product-add-page.component';
 import {NumbersOnlyWithDecimalDirective} from './shared/directives/numbers-only-with-decimal.directive';
 import {NumbersOnlyDirective} from './shared/directives/numbers-only.directive';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatButtonLoadingDirective} from './shared/directives/mat-button-loading.directive';
+import {MatProgressSpinner, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {RequestInterceptorService} from '../utils/service/request-interceptor.service';
+import { ProductBuyPageComponent } from './pages/product/product-buy-page/product-buy-page.component';
+
 
 
 @NgModule({
@@ -39,7 +46,9 @@ import {NumbersOnlyDirective} from './shared/directives/numbers-only.directive';
     ResetPasswordConfirmComponent,
     ProductAddPageComponent,
     NumbersOnlyWithDecimalDirective,
-    NumbersOnlyDirective
+    MatButtonLoadingDirective,
+    NumbersOnlyDirective,
+    ProductBuyPageComponent
   ],
   imports: [
     AppRoutingModule,
@@ -57,9 +66,17 @@ import {NumbersOnlyDirective} from './shared/directives/numbers-only.directive';
     HttpClientModule,
     MatDialogModule,
     MatGridListModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatProgressBarModule
   ],
+  entryComponents : [MatProgressSpinner],
   providers: [
-    // authInterceptorProviders
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

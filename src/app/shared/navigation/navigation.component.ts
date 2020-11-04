@@ -25,9 +25,7 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
 
     this.checkUserLoggedIn();
-    this.authDataService.loggedIn$.subscribe(
-      data => console.log('Dataa',data)
-    );
+
 
   }
 

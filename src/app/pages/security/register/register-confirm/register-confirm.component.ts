@@ -1,8 +1,11 @@
-import {Component, EventEmitter, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {SnackbarService} from '../../../../../utils/service/snackbar.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {RegistrationService} from '../../../../../utils/service/registration.service';
+import {finalize} from 'rxjs/operators';
+import {MainUtilsService} from '../../../../../utils/service/main-utils.service';
+import {Modals} from '../../../../../utils/enums';
 
 @Component({
   selector: 'app-register-confirm',
@@ -12,6 +15,7 @@ import {RegistrationService} from '../../../../../utils/service/registration.ser
 export class RegisterConfirmComponent implements OnInit {
 
   hash: string;
+  buttonLoading: boolean = false;
 
   userDataFormGroup = this.formBuilder.group({
     password: [null, [Validators.required]],
@@ -23,7 +27,9 @@ export class RegisterConfirmComponent implements OnInit {
     private snackBarService: SnackbarService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private regService: RegistrationService) { }
+    private regService: RegistrationService,
+    private router:Router,
+    private mainUtilsService:MainUtilsService) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(
@@ -32,9 +38,23 @@ export class RegisterConfirmComponent implements OnInit {
   }
 
   confirmUser(): void {
+    this.buttonLoading = true;
     console.log(this.userDataFormGroup.value);
     this.regService.confirmRegistration(this.userDataFormGroup.value)
-      .subscribe();
+      .pipe(finalize(() => this.buttonLoading = false))
+      .subscribe(
+        () => {
+          this.snackBarService.openSnackBar('წარმატებით გაიარეთ ავტორიზაცია',1500).afterDismissed().subscribe(
+            () => {
+              this.router.navigate(['/main']);
+              this.mainUtilsService.openDialog(Modals.LoginModal);
+            }
+          );
+        },
+        Err => {
+          console.log(Err);
+        }
+      );
   }
 
 

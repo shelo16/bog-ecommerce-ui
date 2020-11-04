@@ -11,6 +11,8 @@ export class ProductsService {
   headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
 
+  newHeaders = new HttpHeaders()
+    .set('Authorization', 'Client-ID 59a09cdff7bde15')
   constructor(private apiService: ApiService) {
   }
 
@@ -21,6 +23,14 @@ export class ProductsService {
 
   public getNewestProducts() {
     return this.apiService.getWithoutCredentials(`${this.endpoint}`);
+  }
+
+  public getProductById(productId) {
+    return this.apiService.getWithoutCredentials(`${this.endpoint}/`+productId);
+  }
+
+  public uploadImageee(image: string | ArrayBuffer){
+    return this.apiService.postExternalApi('https://api.imgur.com/3/image',image,this.newHeaders);
   }
 
 

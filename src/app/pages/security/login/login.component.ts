@@ -8,6 +8,7 @@ import {MainUtilsService} from '../../../../utils/service/main-utils.service';
 import {Modals} from '../../../../utils/enums';
 import {BehaviorSubject} from 'rxjs';
 import {AuthDataService} from '../../../../utils/service/auth-data.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   justLoggedIn = false;
   errorMessage = '';
+  buttonLoading: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -39,7 +41,9 @@ export class LoginComponent implements OnInit {
   // tslint:disable-next-line:typedef
   login() {
     console.log(this.loginFormGroup.value);
+    this.buttonLoading = true;
     this.loginService.authenticate(this.loginFormGroup.value)
+      .pipe(finalize(() => this.buttonLoading = false))
       .subscribe(
         data => {
           this.authDataService.setAuthInfo(data.email);

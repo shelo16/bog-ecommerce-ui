@@ -3,6 +3,7 @@ import {SnackbarService} from '../../../../../utils/service/snackbar.service';
 import {FormBuilder, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {RegistrationService} from '../../../../../utils/service/registration.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-register-main',
@@ -11,6 +12,7 @@ import {RegistrationService} from '../../../../../utils/service/registration.ser
 })
 export class RegisterMainComponent implements OnInit {
 
+  buttonLoading: boolean = false;
   registerMainFormGroup = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     firstName: ['', [Validators.required]],
@@ -35,11 +37,13 @@ export class RegisterMainComponent implements OnInit {
   }
 
   applyData() {
+    this.buttonLoading = true;
     console.log(this.registerMainFormGroup.value);
     this.regService.generateRegisterShortLink(this.registerMainFormGroup.value)
+      .pipe(finalize(() => this.buttonLoading = false))
       .subscribe(
         data => {
-          this.snackBarService.openSnackBar('დასტურის მეილი გამოიგზავნა',3000).afterDismissed().subscribe(
+          this.snackBarService.openSnackBar('დასტურის მეილი გამოიგზავნა',1500).afterDismissed().subscribe(
             () => {
               this.closeDialog();
             }

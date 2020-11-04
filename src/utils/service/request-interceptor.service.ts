@@ -1,36 +1,35 @@
 import {Injectable} from '@angular/core';
-import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {LoadingService} from './loading.service';
 import {Observable} from 'rxjs';
-import {TokenStorageService} from './token-storage.service';
-import {CookieService} from 'ngx-cookie-service';
-
-
-const TOKEN_HEADER_KEY = 'Authorization';
+import {finalize, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RequestInterceptorService implements HttpInterceptor {
+export class RequestInterceptorService implements HttpInterceptor{
 
-  constructor(private token: TokenStorageService, private cookieService: CookieService) {
+  activeRequests: number = 0;
+
+  constructor(
+    private loadingService: LoadingService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let authReq = req;
-    console.log('Request :::: ',authReq.body);
-    const token = this.token.getToken();
-    console.log('TOKEN : ',token);
-
-    console.log('Cookies ::: ',this.cookieService.getAll());
-
-    if (token != null && token != 'undefined') {
-      authReq = req.clone({headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer-' + token)});
+    if (this.activeRequests === 0) {
+      this.loadingService.startLoading();
     }
-    return next.handle(authReq);
+
+    this.activeRequests++;
+
+    return next.handle(req).pipe(
+      tap(response => console.log("response:", response)),
+      finalize(() => {
+        this.activeRequests--;
+        if (this.activeRequests === 0) {
+          this.loadingService.stopLoading();
+        }
+      })
+    );
   }
-
 }
-
-export const authInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true }
-];

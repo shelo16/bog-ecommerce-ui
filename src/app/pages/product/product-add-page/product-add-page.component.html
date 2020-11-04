@@ -1,4 +1,5 @@
-<h1 mat-dialog-title style='text-align: center;'>დაამატეთ პროდუქტი</h1>
+<h1 mat-dialog-title style='text-align: center;' *ngIf="productFormGroup.get('productId').value == null">დაამატეთ პროდუქტი</h1>
+<h1 mat-dialog-title style='text-align: center;' *ngIf="productFormGroup.get('productId').value != null">შეცვალეთ პროდუქტი</h1>
 <!--<h2 style='color:#ad0a0a;text-align: center;'>{{errorMessage}}</h2>-->
 <div mat-dialog-content>
   <mat-grid-list cols="1" rowHeight="80px">
@@ -7,7 +8,7 @@
       <mat-grid-tile>
         <mat-form-field class="add-user-form-item">
           <mat-label>პროდუქტის სახელი</mat-label>
-          <input matInput  formControlName="productName" autocomplete="off" required>
+          <input matInput formControlName="productName" autocomplete="off" required>
         </mat-form-field>
       </mat-grid-tile>
 
@@ -25,17 +26,18 @@
         </mat-form-field>
       </mat-grid-tile>
 
+      <mat-grid-tile *ngIf="productFormGroup.get('imageUrl').value != null">
+        <img src="{{productFormGroup.get('imageUrl').value}}" alt="Image of product">
+      </mat-grid-tile>
       <mat-grid-tile>
-        <label class="btn btn-default">
-          <input type="file" (change)="selectFile($event)">
-        </label>
+        <input type="file" (change)="selectFile($event)" style="color:transparent;margin-left: 20%">
       </mat-grid-tile>
 
     </form>
   </mat-grid-list>
 </div>
 <div mat-dialog-actions class="DialogButtonsWrapper">
-  <button mat-flat-button color='primary' (click)="addProduct()">დასტური
+  <button mat-flat-button color='primary' (click)="addProduct()" [loading]="buttonLoading">დასტური
   </button>
   <button mat-flat-button color='warn' (click)="closeDialog()">დახურვა</button>
 </div>

@@ -13,6 +13,7 @@ import {Product} from '../../../utils/interfaces';
 export class MainPageComponent implements OnInit {
 
   productList: Product[];
+  email: string;
 
   constructor(private mainUtils: MainUtilsService,
               public authDataService: AuthDataService,
@@ -21,17 +22,24 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllNewestProducts();
+    this.authDataService.email$.subscribe(
+      data => this.email = data
+    );
   }
 
-  openDialog() {
-    this.mainUtils.openDialog(Modals.AddProduct);
+  openDialog(productId) {
+    const dialogData = {
+      productId: productId
+    };
+    const dialogRef = this.mainUtils.openDialog(Modals.AddProduct, dialogData);
+    dialogRef.afterClosed().subscribe(() => this.getAllNewestProducts());
   }
 
   getAllNewestProducts() {
     this.productService.getNewestProducts()
       .subscribe(
         data => {
-          console.log(data);
+          this.productList = data;
         }
       ),
       err => {

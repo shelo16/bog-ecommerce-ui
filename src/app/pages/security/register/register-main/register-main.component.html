@@ -17,28 +17,28 @@
       <mat-grid-tile>
         <mat-form-field class="add-user-form-item">
           <mat-label>სახელი</mat-label>
-          <input matInput formControlName='firstName'>
+          <input matInput formControlName='firstName' autocomplete="off">
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field class="add-user-form-item">
           <mat-label>გვარი</mat-label>
-          <input matInput formControlName='lastName'>
+          <input matInput formControlName='lastName' autocomplete="off">
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field class="add-user-form-item">
           <mat-label>იბან</mat-label>
-          <input matInput formControlName='iban'>
+          <input matInput formControlName='iban' autocomplete="off">
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile>
         <mat-form-field class="add-user-form-item">
           <mat-label>პირადი ნომერი</mat-label>
-          <input matInput formControlName='personalNumber'>
+          <input matInput formControlName='personalNumber' autocomplete="off" appNumbersOnly maxlength="11">
         </mat-form-field>
       </mat-grid-tile>
 
@@ -48,7 +48,7 @@
   </mat-grid-list>
 </div>
 <div mat-dialog-actions class="DialogButtonsWrapper">
-  <button mat-flat-button color='primary' (click)="applyData()">დასტური
+  <button mat-flat-button color='primary' (click)="applyData()" [loading]="buttonLoading">დასტური
   </button>
   <button mat-flat-button color='warn' (click)="closeDialog()">დახურვა</button>
 </div>

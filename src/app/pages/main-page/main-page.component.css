@@ -1,11 +1,15 @@
-.example-card {
-  max-width: 400px;
-
-}
-
-.main-div{
-  margin-top: 2%;
+.mat-chip-list-wrapper{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
 }
+
+.example-card {
+  max-width: 500px;
+
+}
+
+.mat-action {
+  margin-top: 20px;
+  text-align: center;
+}
+

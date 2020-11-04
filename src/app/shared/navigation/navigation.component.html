@@ -10,7 +10,7 @@
       <button mat-raised-button color="primary" routerLink="/risk-report" >დაკავშირებული პირები</button>
       <div *ngIf="!(authDataService.loggedIn$ | async)">
         <button mat-raised-button color="primary" (click)="openDialog('Login')" class="AuthButtons">
-          ლოგინ
+          ავტორიზაცია
         </button>
         <button mat-raised-button color="primary" (click)="openDialog('Register')" class="AuthButtons">
           <strong>+</strong> რეგისტრაცია

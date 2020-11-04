@@ -11,8 +11,8 @@
         <input matInput type="password" formControlName="password" autocomplete="off" required>
       </mat-form-field>
       <div mat-dialog-actions class="DialogButtonsWrapper">
-        <button mat-flat-button color='primary' (click)="confirmUser()">
-          ავტორიზაცია
+        <button mat-flat-button color='primary' (click)="confirmUser()" [loading]="buttonLoading">
+          დადასტურება
         </button>
       </div>
     </form>
