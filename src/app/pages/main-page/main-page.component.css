@@ -1,15 +1,18 @@
-.mat-chip-list-wrapper{
+.mat-chip-list-wrapper {
   display: flex;
   justify-content: flex-end;
 }
 
 .example-card {
-  max-width: 500px;
-
+  max-width: 400px;
 }
+
+img{
+  max-height: 250px;
+}
+
 
 .mat-action {
   margin-top: 20px;
   text-align: center;
 }
-
