@@ -1,3 +1,8 @@
+Used Technologies -> Angular 10 , Angular Material
+
+PROBLEMS :
+* Basically the page is ugly , but I did my best design :D ( Don't judge my css skills )
+
 # BogEcommerceUi
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
