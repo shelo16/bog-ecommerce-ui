@@ -1,0 +1,28 @@
+mat-drawer-container{
+  min-height: 100%;
+}
+
+mat-drawer {
+  width: 15%;
+  background-color: #1a1a1a;
+}
+
+mat-label {
+  color: darkorange;
+}
+
+input {
+  color: darkorange;
+}
+
+mat-slider {
+  margin-right: 2px;
+}
+
+::placeholder {
+  color: orange;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: #1a1a1a;
+}

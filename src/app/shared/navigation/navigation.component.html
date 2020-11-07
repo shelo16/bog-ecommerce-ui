@@ -1,13 +1,12 @@
 <div class="navigation-wrapper">
   <div class="logo-wrapper">
     <a routerLink="/">
-      <img src="../../assets/images/logo.svg" alt="BOG logo">
+      <img src="../../assets/images/logo.svg" alt="BOG logo" class="bog-logo">
     </a>
   </div>
   <nav>
     <ul>
-      <button mat-raised-button color="primary" routerLink="/risk-report" >რისკების რეპორტი</button>
-      <button mat-raised-button color="primary" routerLink="/risk-report" >დაკავშირებული პირები</button>
+      <img src="../../assets/images/arGacherde.png" alt="BOG logo" class="arGacherde">
       <div *ngIf="!(authDataService.loggedIn$ | async)">
         <button mat-raised-button color="primary" (click)="openDialog('Login')" class="AuthButtons">
           ავტორიზაცია

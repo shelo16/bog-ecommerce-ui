@@ -11,28 +11,36 @@ export class ProductsService {
   headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
 
-  newHeaders = new HttpHeaders()
-    .set('Authorization', 'Client-ID 59a09cdff7bde15')
+  imgurHeaders = new HttpHeaders()
+    .set('Authorization', 'Client-ID 59a09cdff7bde15');
+
   constructor(private apiService: ApiService) {
   }
 
 
   public saveProduct(product) {
-    return this.apiService.postWithCredentials(`${this.secureEndpoint}`,product,this.headers);
+    return this.apiService.postWithCredentials(`${this.secureEndpoint}`, product, this.headers);
+  }
+
+  public buyProduct(product) {
+    return this.apiService.postWithCredentials(`${this.secureEndpoint}/purchase`, product, this.headers);
   }
 
   public getNewestProducts() {
     return this.apiService.getWithoutCredentials(`${this.endpoint}`);
   }
 
+  public filterProducts(filter) {
+    return this.apiService.postWithoutCredentials(`${this.endpoint}`,filter,this.headers);
+  }
+
   public getProductById(productId) {
-    return this.apiService.getWithoutCredentials(`${this.endpoint}/`+productId);
+    return this.apiService.getWithoutCredentials(`${this.endpoint}/` + productId);
   }
 
-  public uploadImageee(image: string | ArrayBuffer){
-    return this.apiService.postExternalApi('https://api.imgur.com/3/image',image,this.newHeaders);
+  public uploadImage(image: string | ArrayBuffer) {
+    return this.apiService.postExternalApi('https://api.imgur.com/3/image', image, this.imgurHeaders);
   }
-
 
 
 }

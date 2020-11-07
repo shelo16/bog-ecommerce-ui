@@ -88,7 +88,7 @@ export class ProductAddPageComponent implements OnInit {
   uploadImage(fileString: string | ArrayBuffer) {
     this.buttonLoading = true;
     this.snackBarService.openSnackBar('სურათი იტვირთება, გთხოვთ მოიცადოთ', 3000);
-    this.productService.uploadImageee(fileString)
+    this.productService.uploadImage(fileString)
       .pipe(finalize(() => {
           this.buttonLoading = false;
         }

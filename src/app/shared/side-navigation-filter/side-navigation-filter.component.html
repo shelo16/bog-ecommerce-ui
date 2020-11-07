@@ -1,0 +1,49 @@
+<mat-drawer-container class="side-nav">
+  <mat-drawer mode="side" opened>
+
+    <h1 style="color: darkorange">გაფილტრე</h1>
+    <br>
+
+    <mat-grid-list cols="1" rowHeight="80px">
+      <form [formGroup]='filterFormGroup' class="example-form">
+
+        <mat-grid-tile>
+          <mat-form-field floatLabel="always" class="add-user-form-item" appearance="outline" color="accent">
+            <mat-label>პროდუქტის დასახელება</mat-label>
+            <input matInput formControlName="productName" autocomplete="off" placeholder="შეიყვანეთ ტექსტი">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field floatLabel="always" class="add-user-form-item" appearance="outline" color="accent">
+            <mat-label>მინიმალური ფასი</mat-label>
+            <input matInput formControlName='productPrice' autocomplete="off" placeholder="აკრიფეთ ციფრი" appNumbersOnlyWithDecimal>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field floatLabel="always" class="add-user-form-item" appearance="outline" color="accent">
+            <mat-label>მინიმალური მარაგი</mat-label>
+            <input matInput formControlName='productQuantity' autocomplete="off" placeholder="აკრიფეთ ციფრი" appNumbersOnly>
+          </mat-form-field>
+        </mat-grid-tile>
+      </form>
+
+    </mat-grid-list>
+    <div class="DialogButtonsWrapper">
+      <button mat-flat-button style="background-color: darkorange"
+              (click)="filterProduct()"
+              [loading]="buttonLoading"
+              >
+        ფილტრი
+      </button>
+    </div>
+
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <app-main-page [sendDataToMainPage] = sendDataToMainPage></app-main-page>
+    <router-outlet *ngIf="!sendDataToMainPage"></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+

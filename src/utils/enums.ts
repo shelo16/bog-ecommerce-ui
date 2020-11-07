@@ -3,5 +3,6 @@ export enum Modals {
   RegisterMainModal,
   RegisterConfirmModal,
   ForgotPassword,
-  AddProduct
+  AddProduct,
+  BuyProduct
 }

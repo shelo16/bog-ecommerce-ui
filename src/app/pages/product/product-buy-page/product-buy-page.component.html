@@ -1,1 +1,32 @@
-<p>product-buy-page works!</p>
+<h1 mat-dialog-title style='text-align: center;' >{{productName}}</h1>
+<!--<h2 style='color:#ad0a0a;text-align: center;'>{{errorMessage}}</h2>-->
+<div mat-dialog-content>
+  <mat-grid-list cols="1" rowHeight="80px">
+    <form [formGroup]='productFormGroup'>
+
+      <mat-grid-tile *ngIf="imageUrl != undefined">
+        <img src="{{imageUrl}}" alt="Image of product">
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="add-user-form-item">
+          <mat-label>მიუთითეთ რაოდენობა</mat-label>
+          <input matInput formControlName="productQuantity" autocomplete="off" appNumbersOnly required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="add-user-form-item">
+          <mat-label>შეიყვანეთ ბარათის მონაცემები</mat-label>
+          <input matInput autocomplete="off" required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+    </form>
+  </mat-grid-list>
+</div>
+<div mat-dialog-actions class="DialogButtonsWrapper">
+  <button mat-flat-button color='primary' (click)="purchaseProduct()" [loading]="buttonLoading">დასტური
+  </button>
+  <button mat-flat-button color='warn' (click)="closeDialog()">დახურვა</button>
+</div>

@@ -6,6 +6,7 @@ import {RegisterMainComponent} from '../../app/pages/security/register/register-
 import {RegisterConfirmComponent} from '../../app/pages/security/register/register-confirm/register-confirm.component';
 import {ResetPasswordMainComponent} from '../../app/pages/security/reset/reset-password-main/reset-password-main.component';
 import {ProductAddPageComponent} from '../../app/pages/product/product-add-page/product-add-page.component';
+import {ProductBuyPageComponent} from '../../app/pages/product/product-buy-page/product-buy-page.component';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,8 @@ export class MainUtilsService {
         return ResetPasswordMainComponent;
       case Modals.AddProduct:
         return ProductAddPageComponent;
+      case Modals.BuyProduct:
+        return ProductBuyPageComponent;
       default:
         return null;
     }

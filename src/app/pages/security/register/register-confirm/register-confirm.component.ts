@@ -46,8 +46,7 @@ export class RegisterConfirmComponent implements OnInit {
         () => {
           this.snackBarService.openSnackBar('წარმატებით გაიარეთ ავტორიზაცია',1500).afterDismissed().subscribe(
             () => {
-              this.router.navigate(['/main']);
-              this.mainUtilsService.openDialog(Modals.LoginModal);
+              this.router.navigate(['/main']).then(() => this.mainUtilsService.openDialog(Modals.LoginModal));
             }
           );
         },

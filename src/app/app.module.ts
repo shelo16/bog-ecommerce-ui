@@ -31,6 +31,12 @@ import {MatProgressSpinner, MatProgressSpinnerModule} from '@angular/material/pr
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {RequestInterceptorService} from '../utils/service/request-interceptor.service';
 import { ProductBuyPageComponent } from './pages/product/product-buy-page/product-buy-page.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { SideNavigationFilterComponent } from './shared/side-navigation-filter/side-navigation-filter.component';
+
+
 
 
 
@@ -48,7 +54,8 @@ import { ProductBuyPageComponent } from './pages/product/product-buy-page/produc
     NumbersOnlyWithDecimalDirective,
     MatButtonLoadingDirective,
     NumbersOnlyDirective,
-    ProductBuyPageComponent
+    ProductBuyPageComponent,
+    SideNavigationFilterComponent
   ],
   imports: [
     AppRoutingModule,
@@ -68,7 +75,10 @@ import { ProductBuyPageComponent } from './pages/product/product-buy-page/produc
     MatGridListModule,
     MatProgressSpinnerModule,
     MatChipsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule
   ],
   entryComponents : [MatProgressSpinner],
   providers: [

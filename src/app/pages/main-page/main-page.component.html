@@ -1,5 +1,5 @@
 <div class="center-block mt">
-  <button mat-raised-button color="accent" (click)="openDialog()" *ngIf="authDataService.loggedIn$ | async">
+  <button mat-raised-button color="accent" (click)="openDialog('new',undefined,undefined,undefined)" *ngIf="authDataService.loggedIn$ | async">
     <strong>+</strong> ახალი პროდუქტის დამატება
   </button>
 </div>
@@ -22,8 +22,8 @@
         </div>
       </mat-chip-list>
       <mat-card-actions class="mat-action">
-        <button *ngIf="email != product.email" mat-raised-button color="primary">ყიდვა</button>
-        <button *ngIf="email == product.email" mat-raised-button color="warn" (click)="openDialog(product.productId)">რედაქტირება</button>
+        <button *ngIf="email != product.email" mat-raised-button color="primary" (click)="openDialog('purchase',product.productId,product.imageUrl,product.productName)">ყიდვა</button>
+        <button *ngIf="email == product.email" mat-raised-button color="warn" (click)="openDialog('edit',product.productId,undefined,undefined)">რედაქტირება</button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
